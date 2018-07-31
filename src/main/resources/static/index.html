@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>ATM</title>
+    <script src="lib/jquery-3.3.1.min.js"></script>
+    <script src="index.js"></script>
+</head>
+<body>
+<form id="tableForm">
+    <table border="1px" rules="cols" id="infoTable">
+        <tr>
+            <th>Выбрать</th>
+            <th>ID</th>
+            <th>Фамилия</th>
+            <th>Имя</th>
+            <th>Отчество</th>
+            <th>Дата рождения</th>
+            <th>Комментарий</th>
+        </tr>
+        <tbody id="tableData">
+        </tbody>
+    </table>
+    <input id="fillBtn" type="submit" value="Заполнить таблицу"/>
+    <input id="handleBtn" type="submit" value="Обработать данные"/>
+</form>
+<div id="resultDiv"></div>
+</body>
+
+</html>
