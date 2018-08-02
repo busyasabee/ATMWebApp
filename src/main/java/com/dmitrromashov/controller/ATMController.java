@@ -27,7 +27,7 @@ public class ATMController {
 
     @GetMapping("/hello")
     public String hello(){
-        return "Hello";
+        return "Hello new";
     }
 
     @PostMapping("/upload")
