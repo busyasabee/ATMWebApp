@@ -32,18 +32,6 @@ public class ATMController {
 
     @PostMapping("/upload")
     private int uploadFile(@RequestParam("file") MultipartFile file){
-//        atmService.uploadFile(file);
-//        XSSFWorkbook atmWorkbook;
-//        System.out.println(file.getOriginalFilename());
-//        try {
-//            byte[] bytes = file.getBytes();
-//            atmWorkbook = new XSSFWorkbook(new ByteArrayInputStream(bytes));
-//            int t = 3;
-////            Path path = Paths.get(file.getOriginalFilename());
-////            Files.write(path, bytes);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
         return atmService.uploadFile(file);
     }
 }

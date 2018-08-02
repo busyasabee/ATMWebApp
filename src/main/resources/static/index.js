@@ -15,7 +15,7 @@ jQuery(document).ready(function ($) {
         console.log(fileFormData.get("file"));
 
         $.ajax({
-            url: "/upload",
+            url: "/app/upload",
             type: "POST",
             data: fileFormData,
             enctype: 'multipart/form-data',
