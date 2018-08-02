@@ -7,6 +7,10 @@
     <script src="index.js"></script>
 </head>
 <body>
+<form id="fileForm" method="POST" action="/upload" enctype="multipart/form-data" >
+    <input type="file" name="file" style="display: none"/><br/><br/>
+    <input id="uploadBtn" type="submit" value="Загрузить" />
+</form>
 <form id="tableForm">
     <table border="1px" rules="cols" id="infoTable">
         <tr>
