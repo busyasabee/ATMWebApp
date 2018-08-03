@@ -15,8 +15,9 @@ public class ATMRepairDAO {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public int saveATMRepairs(List<ATMRepair> atmRepairList){
+    public int saveATMRepairs(List<ATMRepair> atmRepairList) throws RuntimeException{
         int savedEntitiesCount = 0;
+
         for (ATMRepair atmRepair: atmRepairList){
             entityManager.persist(atmRepair);
             savedEntitiesCount += 1;
