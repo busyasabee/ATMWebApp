@@ -11,24 +11,25 @@
     <input type="file" name="file" style="display: none"/><br/><br/>
     <input id="uploadBtn" type="submit" value="Загрузить" />
 </form>
-<form id="tableForm">
-    <table border="1px" rules="cols" id="infoTable">
-        <tr>
-            <th>Выбрать</th>
-            <th>ID</th>
-            <th>Фамилия</th>
-            <th>Имя</th>
-            <th>Отчество</th>
-            <th>Дата рождения</th>
-            <th>Комментарий</th>
-        </tr>
-        <tbody id="tableData">
-        </tbody>
-    </table>
-    <input id="fillBtn" type="submit" value="Заполнить таблицу"/>
-    <input id="handleBtn" type="submit" value="Обработать данные"/>
-</form>
+<button id = "showBtn">
+    Отобразить данные
+</button><br>
+<button id = "deleteBtn">
+    Удалить данные
+</button>
+<br>
 <div id="resultDiv"></div>
+<table border="1px" rules="cols" id="atmTable">
+    <tr>
+        <th>Банкомат</th>
+        <th>Начало ремонта</th>
+        <th>Завершение ремонта</th>
+        <th>Работоспособность восстановлена</th>
+        <th>Стоимость работ</th>
+    </tr>
+    <tbody id="tableData">
+    </tbody>
+</table>
 </body>
 
 </html>

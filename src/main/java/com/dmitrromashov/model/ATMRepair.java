@@ -4,13 +4,12 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"atm", "repair_begin"}))
+@Table(name = "ATMRepair", uniqueConstraints = @UniqueConstraint(columnNames = {"atm", "repair_begin"}))
 public class ATMRepair {
     @Id
     @GeneratedValue
     private int id;
 
-    @Column(name = "atm")
     private String ATM;
 
     @Temporal(value = TemporalType.TIMESTAMP)

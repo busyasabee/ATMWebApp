@@ -44,14 +44,20 @@ jQuery(document).ready(function ($) {
         });
     });
 
-    function prepareForm(event)
-    {
-        var files = event.target.files;
-        console.log(files);
-        var formElement = $("#fileForm")[0];
-        fileFormData = new FormData(formElement);
+    $("#deleteBtn").on("click", function(){
 
-        console.log(fileFormData.get("file"));
+        $.ajax({
+            url: "/atmapp/delete",
+            type: "DELETE",
 
-    }
+            success: function(data, textStatus, jqXHR) {
+                $("#resultDiv").html(" <p> Данные были успешно удалены </p> ");
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log("Error deleting data: ", jqXHR.responseText);
+            }
+        });
+    });
+
+
 });

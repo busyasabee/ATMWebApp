@@ -71,9 +71,10 @@ public class ATMService {
             e.printStackTrace();
         }
 
-
         return atmRepairList;
     }
 
-
+    public void deleteData(){
+        atmRepairDAO.clearTable();
+    }
 }

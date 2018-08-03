@@ -3,10 +3,7 @@ package com.dmitrromashov.controller;
 import com.dmitrromashov.service.ATMService;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayInputStream;
@@ -33,5 +30,11 @@ public class ATMController {
     @PostMapping("/upload")
     private int uploadFile(@RequestParam("file") MultipartFile file){
         return atmService.uploadFile(file);
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/delete")
+    private void deleteData(){
+        atmService.deleteData();
+
     }
 }
