@@ -5,8 +5,9 @@
     <title>ATM</title>
     <script src="lib/jquery-3.3.1.min.js"></script>
     <script src="index.js"></script>
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body style="width: 100%">
 <form id="fileForm" method="POST" action="/atmapp/upload" enctype="multipart/form-data" >
     <input type="file" name="file" style="display: none"/><br/><br/>
     <input id="uploadBtn" type="submit" value="Загрузить" />
@@ -20,17 +21,30 @@
 <br>
 <div id="resultDiv"></div>
 <br>
-<table border="1px" rules="cols" id="atmTable" style="display: none">
-    <tr>
-        <th>Банкомат</th>
-        <th>Начало ремонта</th>
-        <th>Завершение ремонта</th>
-        <th>Работоспособность восстановлена</th>
-        <th>Стоимость работ</th>
-    </tr>
-    <tbody id="tableData">
-    </tbody>
-</table>
+<div id = "gridMainDiv" style="display: none">
+    <div class="gridRow">
+        <div>
+            <b>Банкомат</b>
+        </div>
+        <div>
+            <b>Начало ремонта</b>
+        </div>
+        <div>
+            <b>Завершение ремонта</b>
+        </div>
+        <div>
+            <b>Работоспособность восстановлена</b>
+        </div>
+        <div>
+            <b>Стоимость работ</b>
+        </div>
+        <div>
+
+        </div>
+    </div>
+    <div id="gridDataDiv">
+    </div>
+</div>
 </body>
 
 </html>

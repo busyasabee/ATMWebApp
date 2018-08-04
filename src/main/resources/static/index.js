@@ -46,8 +46,8 @@ jQuery(document).ready(function ($) {
                 console.log("GET SUCCESS");
                 console.log(data);
 
-                var tbody = $("#atmTable #tableData");
-                tbody.empty();
+                var gridDataDiv = $("#gridMainDiv #gridDataDiv");
+                gridDataDiv.empty();
 
                 $.each(data, function (key, atmRepair) {
 
@@ -61,17 +61,19 @@ jQuery(document).ready(function ($) {
                         repairEndDate = "";
                     }
 
-                    tbody.append("<tr> " +
-                        "<td>" + atmRepair.atm + "</td>" +
-                        "<td>" + repairBeginDate + "</td>" +
-                        "<td>" + repairEndDate + "</td>" +
-                        "<td>" + atmRepair.workingStatus + "</td>" +
-                        "<td>" + atmRepair.workCost + "</td>" +
-                        "</tr>"
-                    )
+                    gridDataDiv.append("<div class='gridRow'>" +
+                        "<div style='display: none'> " + atmRepair.id + "</div>" +
+                        "<div> <input type='text' value='" + atmRepair.atm + "'></div>" +
+                        "<div> <input type='text' value='" + repairBeginDate + "'></div>" +
+                        "<div> <input type='text' value='" + repairEndDate + "'></div>" +
+                        "<div> <input type='text' value='" + atmRepair.workingStatus + "'></div>" +
+                        "<div> <input type='text' value='" + atmRepair.workCost + "'></div>" +
+                        "<div> <input type='submit' value='Обновить'></div>" +
+                        "</div>");
+
                 });
 
-                $("#atmTable").css("display", "table");
+                $("#gridMainDiv").css("display", "grid");
 
             },
             error: function(jqXHR, textStatus, errorThrown) {
