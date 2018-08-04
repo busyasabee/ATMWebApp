@@ -26,6 +26,7 @@ jQuery(document).ready(function ($) {
 
             success: function(data, textStatus, jqXHR) {
                 $("#resultDiv").html(" <p> Данные были успешно удалены </p> ");
+                $("#atmTable #tableData").empty();
                 
             },
             error: function(jqXHR, textStatus, errorThrown) {
