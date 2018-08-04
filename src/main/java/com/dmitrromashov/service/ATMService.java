@@ -77,4 +77,8 @@ public class ATMService {
     public void deleteData(){
         atmRepairDAO.clearTable();
     }
+
+    public List<ATMRepair> getData(){
+        return atmRepairDAO.getAllATMRepairs();
+    }
 }

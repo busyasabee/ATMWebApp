@@ -7,7 +7,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.TimeZone;
 
 @Repository
 @Transactional
@@ -29,5 +31,11 @@ public class ATMRepairDAO {
     public void clearTable(){
         Query deleteQuery = entityManager.createQuery("DELETE from ATMRepair");
         deleteQuery.executeUpdate();
+    }
+
+    public List<ATMRepair> getAllATMRepairs(){
+        Query selectQuery = entityManager.createQuery("from ATMRepair");
+        ArrayList<ATMRepair> atmRepairs = new ArrayList<ATMRepair>(selectQuery.getResultList());
+        return atmRepairs;
     }
 }

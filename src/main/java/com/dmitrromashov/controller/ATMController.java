@@ -1,17 +1,11 @@
 package com.dmitrromashov.controller;
 
+import com.dmitrromashov.model.ATMRepair;
 import com.dmitrromashov.service.ATMService;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
+import java.util.List;
 
 @RestController
 public class ATMController {
@@ -32,9 +26,14 @@ public class ATMController {
         return atmService.uploadFile(file);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/delete")
+    @DeleteMapping("/delete")
     private void deleteData(){
         atmService.deleteData();
-
     }
+
+    @GetMapping("/show")
+    private List<ATMRepair> showData(){
+        return atmService.getData();
+    }
+
 }

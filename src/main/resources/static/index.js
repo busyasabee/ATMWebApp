@@ -35,6 +35,51 @@ jQuery(document).ready(function ($) {
 
     });
 
+    $("#showBtn").on("click", function(){
+
+        $.ajax({
+            url: "/atmapp/show",
+            type: "GET",
+
+            success: function(data, textStatus, jqXHR) {
+                console.log("GET SUCCESS");
+                console.log(data);
+
+                var tbody = $("#atmTable #tableData");
+                tbody.empty();
+
+                $.each(data, function (key, atmRepair) {
+
+                    var repairBeginDate = atmRepair.repairBeginDate;
+                    if (repairBeginDate == null) {
+                        repairBeginDate = "";
+                    }
+
+                    var repairEndDate = atmRepair.repairEndDate;
+                    if (repairEndDate == null) {
+                        repairEndDate = "";
+                    }
+
+                    tbody.append("<tr> " +
+                        "<td>" + atmRepair.atm + "</td>" +
+                        "<td>" + repairBeginDate + "</td>" +
+                        "<td>" + repairEndDate + "</td>" +
+                        "<td>" + atmRepair.workingStatus + "</td>" +
+                        "<td>" + atmRepair.workCost + "</td>" +
+                        "</tr>"
+                    )
+                });
+
+                $("#atmTable").css("display", "table");
+
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log("Error with showing data: ", jqXHR.responseText);
+            }
+        });
+
+    });
+
 });
 
 function sendData(){
