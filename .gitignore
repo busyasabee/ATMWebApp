@@ -4,3 +4,4 @@ target/
 out/
 *.db
 db/
+test.html

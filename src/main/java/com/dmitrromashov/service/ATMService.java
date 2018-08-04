@@ -7,12 +7,16 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayInputStream;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -80,5 +84,34 @@ public class ATMService {
 
     public List<ATMRepair> getData(){
         return atmRepairDAO.getAllATMRepairs();
+    }
+
+    public ResponseEntity updateEntity(int id, String atrName, String data) {
+
+        try {
+            if (atrName.equals("atm")){
+                atmRepairDAO.updateATMName(id, data);
+            } else if (atrName.equals("repairBeginDate") || atrName.equals("repairEndDate")){
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy HH.mm");
+
+                Date date = simpleDateFormat.parse(data);
+                if (atrName.equals("repairBeginDate")){
+                    atmRepairDAO.updateRepairBeginDate(id, date);
+                } else {
+                    atmRepairDAO.updateRepairEndDate(id, date);
+                }
+
+            } else if (atrName.equals("workingStatus")){
+                atmRepairDAO.updateWorkingStatus(id, data);
+            } else {
+                int workCost = Integer.parseInt(data);
+                atmRepairDAO.updateWorkCost(id, workCost);
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity(HttpStatus.OK);
     }
 }

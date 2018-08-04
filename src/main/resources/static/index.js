@@ -62,13 +62,13 @@ jQuery(document).ready(function ($) {
                     }
 
                     gridDataDiv.append("<div class='gridRow'>" +
-                        "<div style='display: none'> " + atmRepair.id + "</div>" +
-                        "<div> <input type='text' value='" + atmRepair.atm + "'></div>" +
-                        "<div> <input type='text' value='" + repairBeginDate + "'></div>" +
-                        "<div> <input type='text' value='" + repairEndDate + "'></div>" +
-                        "<div> <input type='text' value='" + atmRepair.workingStatus + "'></div>" +
-                        "<div> <input type='text' value='" + atmRepair.workCost + "'></div>" +
-                        "<div> <input type='submit' value='Обновить'></div>" +
+                        "<div class='idDiv' style='display: none'> " + atmRepair.id + "</div>" +
+                        "<div> <input name='atm' type='text' value='" + atmRepair.atm + "'></div>" +
+                        "<div> <input name='repairBeginDate' type='text' value='" + repairBeginDate + "'></div>" +
+                        "<div> <input name='repairEndDate' type='text' value='" + repairEndDate + "'></div>" +
+                        "<div> <input name='workingStatus' type='text' value='" + atmRepair.workingStatus + "'></div>" +
+                        "<div> <input name='workCost' type='text' value='" + atmRepair.workCost + "'></div>" +
+                        "<div> <button class='updateBtn' name='updateBtn'>Обновить</button></div>" +
                         "</div>");
 
                 });
@@ -81,6 +81,59 @@ jQuery(document).ready(function ($) {
             }
         });
 
+    });
+
+    $("#gridDataDiv").on("click", "button", function () {
+       console.log("Button parent");
+       console.log($(this).parent());
+       console.log($(this).parent().parent());
+       var divGridRow = $(this).parent().parent();
+       var atmId = divGridRow.find('.idDiv').val();
+       var atmName = divGridRow.find('[name=atmName]').val();
+       var beginDate = divGridRow.find('[name=beginDate]').val();
+       var endDate = divGridRow.find('[name=endDate]').val();
+       var workingStatus = divGridRow.find('[name=workingStatus]').val();
+       var workingCost = divGridRow.find('[name=workCost]').val();
+        console.log(atmId);
+        console.log(atmName);
+        console.log(beginDate);
+        console.log(endDate);
+        console.log(workingStatus);
+        console.log(workingCost);
+       // console.log($(this).parent().find('input[name=atmRepair]').val());
+    });
+
+    $("#gridDataDiv").on("change", "input", function () {
+
+        var divGridRow = $(this).parent().parent();
+        var id = divGridRow.find('.idDiv').text();
+        var atrName = $(this).attr('name');
+        var atrValue = $(this).val();
+
+        var sendData = {};
+        sendData.id = id;
+        sendData.atrName = atrName;
+        sendData.atrValue = atrValue;
+
+        $.ajax({
+            url: "/atmapp/update?" + $.param(sendData),
+            type: "POST",
+            // data: sendData,
+
+            success: function(data, textStatus, jqXHR) {
+                $("#resultDiv").html("<p> Данные были успешно обновлены </p> ");
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                $("#resultDiv").html(" <p> Произошла ошибка с изменением данных. Возможно введены неправильные данные </p> ");
+                console.log("ERROR : ", jqXHR.responseText);
+
+            }
+        });
+
+        console.log(id);
+        console.log("Name " + atrName);
+        console.log("Input");
+        console.log($(this).val());
     });
 
 });
