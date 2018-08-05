@@ -24,13 +24,10 @@ jQuery(document).ready(function ($) {
             url: "/atmapp/delete",
             type: "DELETE",
 
-            success: function(data, textStatus, jqXHR) {
+            success: function() {
                 $("#resultDiv").html(" <p> Данные были успешно удалены </p> ");
                 $("#gridMainDiv").css("display", "none");
                 
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.log("Error deleting data: ", jqXHR.responseText);
             }
         });
 
@@ -42,7 +39,7 @@ jQuery(document).ready(function ($) {
             url: "/atmapp/show",
             type: "GET",
 
-            success: function(data, textStatus, jqXHR) {
+            success: function(data) {
                 console.log("GET SUCCESS");
                 console.log(data);
 
@@ -76,31 +73,11 @@ jQuery(document).ready(function ($) {
                 $("#gridMainDiv").css("display", "grid");
 
             },
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.log("Error with showing data: ", jqXHR.responseText);
+            error:function () {
+                $("#resultDiv").html(" <p> Нет данных для отображения </p> ");
             }
         });
 
-    });
-
-    $("#gridDataDiv").on("click", "button", function () {
-       console.log("Button parent");
-       console.log($(this).parent());
-       console.log($(this).parent().parent());
-       var divGridRow = $(this).parent().parent();
-       var atmId = divGridRow.find('.idDiv').val();
-       var atmName = divGridRow.find('[name=atmName]').val();
-       var beginDate = divGridRow.find('[name=beginDate]').val();
-       var endDate = divGridRow.find('[name=endDate]').val();
-       var workingStatus = divGridRow.find('[name=workingStatus]').val();
-       var workingCost = divGridRow.find('[name=workCost]').val();
-        console.log(atmId);
-        console.log(atmName);
-        console.log(beginDate);
-        console.log(endDate);
-        console.log(workingStatus);
-        console.log(workingCost);
-       // console.log($(this).parent().find('input[name=atmRepair]').val());
     });
 
     $("#gridDataDiv").on("change", "input", function () {
@@ -118,22 +95,16 @@ jQuery(document).ready(function ($) {
         $.ajax({
             url: "/atmapp/update?" + $.param(sendData),
             type: "POST",
-            // data: sendData,
 
-            success: function(data, textStatus, jqXHR) {
+            success: function() {
                 $("#resultDiv").html("<p> Данные были успешно обновлены </p> ");
             },
-            error: function(jqXHR, textStatus, errorThrown) {
+            error: function() {
                 $("#resultDiv").html(" <p> Произошла ошибка с изменением данных. Возможно введены неправильные данные </p> ");
-                console.log("ERROR : ", jqXHR.responseText);
 
             }
         });
 
-        console.log(id);
-        console.log("Name " + atrName);
-        console.log("Input");
-        console.log($(this).val());
     });
 
 });
@@ -148,10 +119,10 @@ function sendData(){
         contentType: false,
         cache: false,
 
-        success: function(data, textStatus, jqXHR) {
+        success: function(data) {
             $("#resultDiv").html(" <p> Загружено записей " + data + "</p> ");
         },
-        error: function(jqXHR, textStatus, errorThrown) {
+        error: function() {
             $("#resultDiv").html(" <p> Произошла ошибка с загрузкой данных. Возможно загружаются данные из одного файла несколько раз или данные в неправильном формате </p> ");
         }
     });

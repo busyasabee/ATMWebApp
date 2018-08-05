@@ -35,8 +35,15 @@ public class ATMController {
     }
 
     @GetMapping("/show")
-    private List<ATMRepair> showData(){
-        return atmService.getData();
+    private ResponseEntity<List<ATMRepair>> showData(){
+        List<ATMRepair> atmRepairList = atmService.getData();
+        if (atmRepairList.size() == 0){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } else {
+            return new ResponseEntity<>(atmRepairList, HttpStatus.OK);
+
+        }
+//        return atmService.getData();
     }
 
     @PostMapping("/update")
