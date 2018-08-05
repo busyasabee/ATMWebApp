@@ -1,12 +1,7 @@
 package com.dmitrromashov.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import javax.persistence.*;
 import java.util.Date;
-import java.util.TimeZone;
-
-import static com.fasterxml.jackson.annotation.JsonFormat.DEFAULT_TIMEZONE;
 
 @Entity
 @Table(name = "ATMRepair", uniqueConstraints = @UniqueConstraint(columnNames = {"atm", "repair_begin"}))

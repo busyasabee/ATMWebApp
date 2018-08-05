@@ -1,6 +1,6 @@
 .gridRow{
     display: grid;
-    grid-template-columns: repeat(6, 15%);
+    grid-template-columns: repeat(5, 15%);
 }
 
 input{

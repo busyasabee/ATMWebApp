@@ -46,6 +46,7 @@ jQuery(document).ready(function ($) {
                 console.log("GET SUCCESS");
                 console.log(data);
 
+                $("#resultDiv").html("<p></p> ");
                 var gridDataDiv = $("#gridMainDiv #gridDataDiv");
                 gridDataDiv.empty();
 
@@ -68,7 +69,6 @@ jQuery(document).ready(function ($) {
                         "<div> <input name='repairEndDate' type='text' value='" + repairEndDate + "'></div>" +
                         "<div> <input name='workingStatus' type='text' value='" + atmRepair.workingStatus + "'></div>" +
                         "<div> <input name='workCost' type='text' value='" + atmRepair.workCost + "'></div>" +
-                        "<div> <button class='updateBtn' name='updateBtn'>Обновить</button></div>" +
                         "</div>");
 
                 });
@@ -152,9 +152,7 @@ function sendData(){
             $("#resultDiv").html(" <p> Загружено записей " + data + "</p> ");
         },
         error: function(jqXHR, textStatus, errorThrown) {
-            $("#resultDiv").html(" <p> Произошла ошибка с загрузкой данных. Возможно загружаются данные из одного файла несколько раз </p> ");
-            console.log("ERROR : ", jqXHR.responseText);
-
+            $("#resultDiv").html(" <p> Произошла ошибка с загрузкой данных. Возможно загружаются данные из одного файла несколько раз или данные в неправильном формате </p> ");
         }
     });
 }

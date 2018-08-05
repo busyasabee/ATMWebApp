@@ -7,8 +7,6 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -86,32 +84,41 @@ public class ATMService {
         return atmRepairDAO.getAllATMRepairs();
     }
 
-    public ResponseEntity updateEntity(int id, String atrName, String data) {
+    public int updateEntity(int id, String atrName, String data) {
 
-        try {
-            if (atrName.equals("atm")){
+        switch (atrName){
+            case "atm":
                 atmRepairDAO.updateATMName(id, data);
-            } else if (atrName.equals("repairBeginDate") || atrName.equals("repairEndDate")){
+                break;
+            case "repairBeginDate":
+            case "repairEndDate":
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy HH.mm");
 
-                Date date = simpleDateFormat.parse(data);
+                Date date;
+                try {
+                    date = simpleDateFormat.parse(data);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                    return -1;
+                }
                 if (atrName.equals("repairBeginDate")){
                     atmRepairDAO.updateRepairBeginDate(id, date);
                 } else {
                     atmRepairDAO.updateRepairEndDate(id, date);
                 }
-
-            } else if (atrName.equals("workingStatus")){
+                break;
+            case "workingStatus":
                 atmRepairDAO.updateWorkingStatus(id, data);
-            } else {
+                break;
+            case "workCost":
                 int workCost = Integer.parseInt(data);
                 atmRepairDAO.updateWorkCost(id, workCost);
-            }
-        } catch (Exception e){
-            e.printStackTrace();
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid ATMRepair attribute: " + atrName);
+
         }
 
-        return new ResponseEntity(HttpStatus.OK);
+        return 0;
     }
 }
